@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,11 +46,23 @@ public class BuildingTypeSelectUI : MonoBehaviour
             btnTransform.Find("image").GetComponent<Image>().sprite = buildingType.sprite;
 
             btnTransform.GetComponent<Button>().onClick.AddListener(() => { BuildingManager.Instance.SetActiveBuildingType(buildingType); });
+            
+
+            MouseEnterExitEvents mouseEnterExitEvents = btnTransform.GetComponent<MouseEnterExitEvents>();
+            mouseEnterExitEvents.OnMouseEnter += (object sendler, EventArgs e) => TooltipUI.Instance.Show(buildingType.nameString + buildingType.GetConstructionResourceCostString());
+            mouseEnterExitEvents.OnMouseExit += (object sendler,EventArgs e) => TooltipUI.Instance.Hide();
+
             buildingTypeDictionary[buildingType] = btnTransform;
             index++;
         }
         SetSelectedUI();
     }
+
+    private void MouseEnterExitEvents_OnMouseExit(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
     private void Update()
     {
         UpdateSelectedButton();

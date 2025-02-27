@@ -27,4 +27,24 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         return resourceAmountDictionary[resourceType];
     }
+    public void SpendResource(ResourceAmount[] resourceAmountArray)
+    {
+        foreach (ResourceAmount resourceAmount in resourceAmountArray)
+        {
+            resourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.cost;
+        }
+    }
+    public bool CanAfford(ResourceAmount[] resourceAmountArray)
+    {
+        foreach (ResourceAmount resourceAmount in resourceAmountArray)
+        {
+            if (GetResourceAmount(resourceAmount.resourceType) >= resourceAmount.cost)
+            {
+                //Can afford
+            }
+            else
+                return false;
+        }
+        return true;
+    }
 }

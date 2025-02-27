@@ -14,7 +14,7 @@ public class Cursor : Singleton<Cursor>
     public Action onClickUI;
     private void Start()
     {
-        UnityEngine.Cursor.visible = false;
+        //UnityEngine.Cursor.visible = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         mainCamera = Camera.main;
     }
@@ -36,12 +36,6 @@ public class Cursor : Singleton<Cursor>
             gameObject.GetComponent<SpriteRenderer>().sprite = buildType.sprite;
             gameObject.transform.localScale = new Vector3(1, 1, 1);
             SetSpriteAlpha(0.5f);
-        }
-        else
-        {
-            gameObject.GetComponent<SpriteRenderer>().sprite = cursor;
-            gameObject.transform.localScale = new Vector3(.5f, .5f, .5f);
-            SetSpriteAlpha(1f);
         }
     }
 

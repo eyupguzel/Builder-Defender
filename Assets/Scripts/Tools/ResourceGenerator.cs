@@ -43,6 +43,18 @@ public class ResourceGenerator : MonoBehaviour
             ResourceManager.Instance.AddResource(resourceGeneratorData.resourceType, 1);
         }
     }
+    public ResourceGeneratorData GetResourceGeneratorData()
+    {
+        return resourceGeneratorData;
+    }
+    public float GetResourceTimeNormalized()
+    {
+        return timer / timerMax;
+    }
+    public float GetAmountGeneratedPerSecond()
+    {
+        return 1 / timerMax;
+    }
     /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
