@@ -8,6 +8,7 @@ public class BuildingTypesSo : ScriptableObject
     public Sprite sprite;
     public ResourceGeneratorData resourceGeneratorData;
     public ResourceAmount[] resourceAmount;
+    public int healthMax;
 
     public string GetConstructionResourceCostString()
     {
