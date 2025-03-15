@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class BuildingManager : Singleton<BuildingManager>
 {
+    [SerializeField] private Transform hq;
     private Cursor cursor;
     BuildingTypesSo buildingType;
     BoxCollider2D boxCollider;
@@ -13,7 +14,15 @@ public class BuildingManager : Singleton<BuildingManager>
         cursor = Cursor.Instance;
         cursor.onClickGround += CreateBuildingObject;
         tooltip = TooltipUI.Instance;
+
+        hq.GetComponent<HealthSystem>().OnDied += BuildingManager_OnDied;
     }
+
+    private void BuildingManager_OnDied()
+    {
+        GameOverUI.Instance.UpdateUI();
+    }
+
     public void SetActiveBuildingType(BuildingTypesSo buildingType)
     {
         this.buildingType = buildingType;
@@ -31,7 +40,8 @@ public class BuildingManager : Singleton<BuildingManager>
                 if (ResourceManager.Instance.CanAfford(buildingType.resourceAmount))
                 {
                     ResourceManager.Instance.SpendResource(buildingType.resourceAmount);
-                    Instantiate(buildingType.prefab, cursor.GetMouseWorldPosition(), Quaternion.identity);
+                    //Instantiate(buildingType.prefab, cursor.GetMouseWorldPosition(), Quaternion.identity);
+                    BuildingConstruction.CreateBuildingConstruction(cursor.GetMouseWorldPosition(),buildingType);
                 }
                 else
                     tooltip.Show("Cannot afford !", new TooltipTimer { timer = 2f });
@@ -54,7 +64,7 @@ public class BuildingManager : Singleton<BuildingManager>
             return false;
         }
 
-        collider2D = Physics2D.OverlapCircleAll(transform.position, 10f);
+        collider2D = Physics2D.OverlapCircleAll(transform.position, buildingType.resourceGeneratorData.resourceDetectionRadius);
 
         foreach (Collider2D collider in collider2D)
         {
@@ -69,6 +79,11 @@ public class BuildingManager : Singleton<BuildingManager>
         }
         errorMesage = "";
         return true;
+    }
+
+    public Transform GetBuildingHQ()
+    {
+        return hq;
     }
 
 }

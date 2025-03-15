@@ -31,12 +31,14 @@ public class Cursor : Singleton<Cursor>
     }
     public void SetCursorSprite(BuildingTypesSo buildType)
     {
-        if(buildType != null)
+        if (buildType != null)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = buildType.sprite;
             gameObject.transform.localScale = new Vector3(1, 1, 1);
             SetSpriteAlpha(0.5f);
         }
+        else
+            gameObject.GetComponent<SpriteRenderer>().sprite = cursor;
     }
 
     private void SetSpriteAlpha(float alpha)

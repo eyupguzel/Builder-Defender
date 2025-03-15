@@ -21,4 +21,5 @@ MonoBehaviour:
     resourceDetectionRadius: 7
     maxResourceAmount: 7
   resourceAmount: []
-  healthMax: 150
+  healthMax: 300
+  constructionTimerMax: 0

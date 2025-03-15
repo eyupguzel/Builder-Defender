@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58de507d585ad042b667df4c26deb72, type: 3}
+  m_Name: Level_2_HQ
+  m_EditorClassIdentifier: 
+  level: 2
+  health: 400
+  damage: 30
+  sprite: {fileID: 6790314944055911035, guid: 5931982c37a5431439b1ea635a83b954, type: 3}
+  resourceAmount: []

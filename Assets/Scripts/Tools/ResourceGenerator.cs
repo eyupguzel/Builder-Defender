@@ -41,6 +41,7 @@ public class ResourceGenerator : MonoBehaviour
         {
             timer += timerMax;
             ResourceManager.Instance.AddResource(resourceGeneratorData.resourceType, 1);
+            SummaryManager.Instance.AddResource(resourceGeneratorData.resourceType, 1);
         }
     }
     public ResourceGeneratorData GetResourceGeneratorData()

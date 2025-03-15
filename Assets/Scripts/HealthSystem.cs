@@ -7,17 +7,20 @@ public class HealthSystem : MonoBehaviour
     private int health;
 
     public event EventHandler OnDamaged;
-    public event EventHandler OnDied;
+    public event Action OnHeal;
+    public event Action OnDied;
 
-    private void Awake()
+    private bool oneTime = true;
+    public void SetHealthMax(int healthMax)
     {
+        this.healthMax = healthMax;
         health = healthMax;
     }
-    public void SetHealthMax(BuildingTypesSo buildingType,bool updateHealth)
+    public void SetHealthMax(EnemiesSO enemyType, bool updateHealth)
     {
-        healthMax = buildingType.healthMax;
+        healthMax = enemyType.healthMax;
 
-        if(updateHealth )
+        if (updateHealth)
             health = healthMax;
     }
     public void Damage(int damage)
@@ -27,17 +30,36 @@ public class HealthSystem : MonoBehaviour
 
         OnDamaged?.Invoke(this, EventArgs.Empty);
 
-        if(IsDead())
-            OnDied?.Invoke(this, EventArgs.Empty);
+        if (IsDead() && oneTime)
+        {
+            OnDied?.Invoke();
+            oneTime = false;
+        }
+    }
+    public void Heal(int healAmount)
+    {
+        health += healAmount;
+        health = Mathf.Clamp(health, 0, healthMax);
+
+        OnHeal?.Invoke();
+    }
+    public void HealFull()
+    {
+        healthMax = health;
+        OnHeal?.Invoke();
     }
 
     public bool IsDead()
     {
-        return health == 0;
+        return health <= 0;
     }
     public int GetHealth()
     {
         return health;
+    }
+    public int GetHealthMax()
+    {
+        return healthMax;
     }
     public float GetHealthNormalized()
     {
