@@ -6,6 +6,7 @@ public class StreetLight : MonoBehaviour
     private Light2D spotLight;
     private Animator animator;
 
+    private DayNightCycle cycle;
     private void Awake()
     {
         DayNightCycle.OnDayNightChange += HandleDayNightChange;
@@ -13,21 +14,21 @@ public class StreetLight : MonoBehaviour
         spotLight = GetComponent<Light2D>();
         animator = GetComponent<Animator>();
 
-        spotLight.enabled = false;
-        animator.SetBool("IsOn", false);
+        HandleDayNightChange();
     }
 
-    private void HandleDayNightChange(bool isDay)
+    private void HandleDayNightChange()
     {
-        if (isDay)
+        switch (cycle.state)
         {
-            spotLight.enabled = false;
-            animator.SetBool("IsOn", false);
-        }
-        else
-        {
-            spotLight.enabled = true;
-            animator.SetBool("IsOn", true);
+            case DayNightState.Day: 
+                spotLight.enabled = false;
+                animator.SetBool("IsOn", false);
+                break;
+            case DayNightState.Night: 
+                spotLight.enabled = true;
+                animator.SetBool("IsOn", true);
+                break;
         }
     }
     private void OnDestroy()
