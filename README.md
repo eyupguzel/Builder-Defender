@@ -6,7 +6,7 @@
 
 ### In-Game Screenshots
 
-<img src="Screenshots/Ss_2.png" alt="Screenshot 2" width="200" /> <img src="Screenshots/Ss_1.png" alt="Screenshot 1" width="200" />  <img src="Screenshots/Ss_3.png" alt="Screenshot 3" width="200" />
+<img src="Images/Ss_3.png" alt="Screenshot 1" width="960" /> <img src="Images/Ss_2.png" alt="Screenshot 2" width="960" />  <img src="Images/Ss_1.png" alt="Screenshot 3" width="960" />
 
 ## Authors
 
